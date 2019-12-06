@@ -31,6 +31,7 @@ async function main() {
 
   const result = await deployAccount(factoryAddress, salt, '0x00a329c0648769a73afac7f9381e08fb43dbea72')
 
+  console.log('Block Number: ' + result.blockNumber.toString(16))
   console.log(result.txHash)
   console.log(result.address)
 

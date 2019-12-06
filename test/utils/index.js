@@ -43,6 +43,7 @@ async function deployAccount (factoryAddress, salt, recipient) {
 
   return {
     txHash: result.transactionHash,
+    blockNumber: result.blockNumber,
     address: addr,
     receipt: result
   }
