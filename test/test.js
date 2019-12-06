@@ -18,7 +18,7 @@ async function main() {
 
   console.log(factoryAddress)
 
-  const bytecode = `${accountBytecode}${encodeParam('address', '0x303de46de694cc75a2f66da93ac86c6a6eee607e').slice(2)}`
+  const bytecode = `${accountBytecode}${encodeParam('address', '0x00a329c0648769a73afac7f9381e08fb43dbea72').slice(2)}`
 
   const computedAddr = buildCreate2Address(
     factoryAddress,
@@ -29,7 +29,7 @@ async function main() {
   console.log(computedAddr)
   console.log(await isContract(computedAddr))
 
-  const result = await deployAccount(factoryAddress, salt, '0x303de46de694cc75a2f66da93ac86c6a6eee607e')
+  const result = await deployAccount(factoryAddress, salt, '0x00a329c0648769a73afac7f9381e08fb43dbea72')
 
   console.log(result.txHash)
   console.log(result.address)

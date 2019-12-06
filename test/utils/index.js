@@ -4,10 +4,7 @@ const HDWalletProvider = require('truffle-hdwallet-provider')
 
 // TODO: clean up
 
-const provider = new HDWalletProvider(
-  'wine churn waste cabbage admit security brisk knife swallow fancy rib observe',
-  'http://localhost:8545',
-)
+const provider = new Web3.providers.HttpProvider("http://localhost:8545")
 
 const web3 = new Web3(provider)
 
@@ -19,7 +16,7 @@ async function deployFactory() {
   const {_address: factoryAddress} = await Factory.deploy({
       data: factoryBytecode
   }).send({
-    from: '0x303de46de694cc75a2f66da93ac86c6a6eee607e'
+    from: '0x00a329c0648769a73afac7f9381e08fb43dbea72'
   })
 
   return factoryAddress
@@ -27,14 +24,12 @@ async function deployFactory() {
 
 async function deployAccount (factoryAddress, salt, recipient) {
   const factory = new web3.eth.Contract(factoryAbi, factoryAddress)
-  const account = '0x303de46de694cc75a2f66da93ac86c6a6eee607e'
-  const nonce = await web3.eth.getTransactionCount(account)
+  const account = '0x00a329c0648769a73afac7f9381e08fb43dbea72'
   const bytecode = `${accountBytecode}${encodeParam('address', recipient).slice(2)}`
   const result = await factory.methods.deploy(bytecode, salt).send({
     from: account,
     gas: 4500000,
     gasPrice: 10000000000,
-    nonce
   })
 
   const computedAddr = buildCreate2Address(
